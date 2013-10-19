@@ -1,0 +1,56 @@
+# vim: ft=sh
+
+### Exports
+
+### Aliases
+
+alias ls="ls -Fhal --color=auto"
+
+alias mv="mv -v"
+alias cp="cp -v"
+alias rm="rm -v"
+
+alias chmod="chmod -v"
+alias chown="chown -v"
+
+alias du="du -h"
+alias df="df -h"
+
+alias cu="cp -u"
+
+alias gdb="gdb -q"
+
+### Functions
+
+cl () { 
+	cd $1 && ls 
+}
+
+man () {
+    env LESS_TERMCAP_mb=$'\E[01;31m' \
+    LESS_TERMCAP_md=$'\E[01;38;5;74m' \
+    LESS_TERMCAP_me=$'\E[0m' \
+    LESS_TERMCAP_se=$'\E[0m' \
+    LESS_TERMCAP_so=$'\E[38;5;246m' \
+    LESS_TERMCAP_ue=$'\E[0m' \
+    LESS_TERMCAP_us=$'\E[04;38;5;146m' \
+    man "$@"
+}
+
+# this is so I never make the typo of cat -> .SUPERIMPORTANT
+append () {
+	cat ->> $1 
+}
+
+sprunge () {
+	# only add parameters if they're set
+	url='$(curl -F 'sprunge=<-' http://sprung.us | tr -d '\n')'
+	echo $url?$1#n-$2
+}
+
+world () {
+	printf "Brisbane: %-150s\n" "$(date)" && 
+	printf "London: %.20s\n" "$(TZ='Europe/London' date)" && 
+	echo -n "Los Angeles: " && TZ='America/Los_Angeles' date &&
+	echo -n "New York: " && TZ="America/New_York" date
+}
