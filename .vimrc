@@ -1,14 +1,15 @@
 
 syntax on
-
-se autoindent
-
-se number
-se title
-
-se winheight=9999
-se winwidth=9999
-
-se mouse=a
-
 colorscheme jellybeans
+set bg=dark
+set number
+set mouse=a
+set title
+
+set winwidth=75
+set winheight=45
+
+set backspace=indent,eol,start 
+set nowrap
+set cindent
+set modeline
