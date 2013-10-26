@@ -1,9 +1,8 @@
 # vim: set ft=sh:
 
-cd $HOME
-
 ### Exports
 
+export CYGWIN="$CYGWIN error_start=dumper -d %1 %2"
 export PATH="$PATH:/bin:/usr/bin:/usr/local/bin"
 export PS1="\e[1;31m[\\w]\\$\e[m "
 
@@ -39,8 +38,8 @@ sprunge () {
 }
 
 world () {
-	printf "Brisbane: %-150s\n" "$(date)" && 
-	printf "London: %.20s\n" "$(TZ='Europe/London' date)" && 
+	printf "Brisbane: %s\n" "$(date)" && 
+	printf "London: %s\n" "$(TZ='Europe/London' date)" && 
 	echo -n "Los Angeles: " && TZ='America/Los_Angeles' date &&
 	echo -n "New York: " && TZ="America/New_York" date
 }
