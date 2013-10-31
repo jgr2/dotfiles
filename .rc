@@ -32,7 +32,7 @@ append () {
 
 sprunge () {
 	# TODO: only add parameters if they're set
-	url='$(curl -F 'sprunge=<-' http://sprung.us | tr -d '\n')'
+	url="$(curl -F 'sprunge=<-' http://sprung.us | tr -d '\n')"
 	echo $url?$1#n-$2
 }
 
