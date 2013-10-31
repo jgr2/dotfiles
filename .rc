@@ -3,7 +3,8 @@
 ### Exports
 
 export PATH="$PATH:/bin:/usr/bin:/usr/local/bin"
-export PS1="\e[1;31m[\\w]\\$\e[m "
+
+export PS1="\e[1m[\\u@\\h \\w]\\$\e[m "
 
 ### Aliases
 
