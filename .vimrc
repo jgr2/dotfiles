@@ -12,6 +12,8 @@ set modeline
 
 set number
 syntax on
+filetype plugin on
+
 colors jellybeans
 
 hi Normal ctermbg=none
