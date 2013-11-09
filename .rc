@@ -2,11 +2,11 @@
 
 ### Exports
 
-export HOME="/home/jgr"
+#export HOME="/home/jgr"
 
 export PS1="\e[1m[\\u@\\h \\w]\\$\e[m "
 
-export PATH="$PATH:/bin:/usr/bin:/usr/local/bin:/code/go/bin/"
+export PATH="$PATH:/bin:/usr/bin:/usr/local/bin:$HOME/code/go/bin/"
 
 export GOPATH="$HOME/code/go/"
 
