@@ -2,13 +2,16 @@
 
 ### Exports
 
-#export HOME="/home/jgr"
-
-export PS1="\e[1m[\\u@\\h \\w]\\$\e[m "
+export PS1="\[\e[1;34m[\]\\u@\\h \\W]\\$\[\e[0m\] "
 
 export PATH="$PATH:/bin:/usr/bin:/usr/local/bin:$HOME/code/go/bin/"
 
+export EDITOR="vim"
+
 export GOPATH="$HOME/code/go/"
+
+export LESSOPEN="| /usr/bin/source-highlight-esc.sh %s"
+export LESS='-R '
 
 ### Aliases
 
@@ -25,19 +28,78 @@ alias cu="cp -u"
 
 alias gdb="gdb -q"
 
+alias sqlite3="sqlite3 -column -header"
+
 ### Functions
+
+#TODO: posix compliance
 
 cl () {
 	cd $1 && ls
 }
 
+mc () {
+	t=$1
+	shift
+	mv ${@} $t && cd $t
+	unset t
+}
+
+mergdir () {
+	for d in $@
+	do
+		mv -i ./$d/* ./ && rmdir $d
+	done
+}
+
+smv () (
+	pat=$1
+	rep=$2
+
+	shift 2
+
+	if [ $# -ne 0 ]
+	then
+		input=$@
+		interactive="-i"
+	else
+		input=$(cat)
+	fi
+
+	for target in $input
+	do
+		new=$(echo $target | sed -n "/$pat/ s/$pat/$rep/ p")
+
+		# only process files that match pat
+		if [ -z $new ]
+		then
+			continue
+		fi
+
+		# posix mv doesnt have -c (no clobber)
+		# cant prompt for overwrite when reading from stdin
+		# so force -c
+		# TODO: add force option using getopts
+		if [ ! $interactive ]
+		then
+			if [ -e $new ]
+			then
+				echo "smv: target file exists, skipping: $new"
+				continue
+			fi
+		fi
+
+		mv $interactive "$target" "$new"
+	done
+)
+
 append () {
-	cat ->> $1 
+	cat ->> $1
 }
 
 sprunge () {
 	# TODO: only add parameters if they're set
-	url="$(curl -F 'sprunge=<-' http://sprung.us | tr -d '\n')"
+	url="$(curl -F 'sprunge=<-' http://sprunge.us | tr -d '\n')"
 	echo $url?$1#n-$2
 }
 
@@ -47,3 +109,25 @@ world () {
 	echo -n "Los Angeles: " && TZ='America/Los_Angeles' date &&
 	echo -n "New York: " && TZ="America/New_York" date
 }
+
+onbattery () {
+	cpupower frequency-set -g powersave
+	echo battery > /sys/class/drm/card0/device/power_dpm_state
+}
+
+offbattery () {
+	cpupower frequency-set -g performance
+	echo performance > /sys/class/drm/card0/device/power_dpm_state
+}
+
+man() {
+    env LESS_TERMCAP_mb=$'\E[01;31m' \
+    LESS_TERMCAP_md=$'\E[01;38;5;74m' \
+    LESS_TERMCAP_me=$'\E[0m' \
+    LESS_TERMCAP_se=$'\E[0m' \
+    LESS_TERMCAP_so=$'\E[38;5;246m' \
+    LESS_TERMCAP_ue=$'\E[0m' \
+    LESS_TERMCAP_us=$'\E[04;38;5;146m' \
+    man "$@"
+}
+
