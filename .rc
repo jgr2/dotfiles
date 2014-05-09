@@ -93,6 +93,10 @@ smv () (
 	done
 )
 
+cpe () {
+	cp $1 $2 && $EDITOR $2
+}
+
 append () {
 	cat ->> $1
 }
@@ -101,6 +105,11 @@ sprunge () {
 	# TODO: only add parameters if they're set
 	url="$(curl -F 'sprunge=<-' http://sprunge.us | tr -d '\n')"
 	echo $url?$1#n-$2
+}
+
+bukit () {
+	url="$(curl -X POST --data-binary @- http://p.offblast.org/new | tr -d '\n')"
+	echo $url
 }
 
 world () {
