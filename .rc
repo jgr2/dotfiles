@@ -32,17 +32,34 @@ alias sqlite3="sqlite3 -column -header"
 
 ### Functions
 
-#TODO: posix compliance
+die () {
+	echo $2
+	exit $1
+}
+
+edsh () {
+	if [ ! -e $1 ]
+	then
+		echo "#!/bin/sh" > $1 && chmod u+x $1 && $EDITOR $1
+	else
+		$EDITOR $1
+	fi
+}
 
 cl () {
 	cd $1 && ls
 }
 
 mc () {
-	t=$1
-	shift
-	mv ${@} $t && cd $t
-	unset t
+	mv ${@#$1} $1 && cd $1
+}
+
+mkcd () {
+	mkdir $1 && cd $1
+}
+
+mkcl () {
+	mkdir $1 && cl $1
 }
 
 mergdir () {
@@ -58,40 +75,37 @@ smv () (
 
 	shift 2
 
-	if [ $# -ne 0 ]
-	then
-		input=$@
-		interactive="-i"
-	else
-		input=$(cat)
-	fi
-
-	for target in $input
+	for arg in "$@"
 	do
-		new=$(echo $target | sed -n "/$pat/ s/$pat/$rep/ p")
+		echo $arg
+	done |  sed -n "/$pat/ p" | while read -r src
+	do
+		dest="$(echo $src | sed "s/$pat/$rep/")"
 
-		# only process files that match pat
-		if [ -z $new ]
-		then
-			continue
-		fi
-
-		# posix mv doesnt have -c (no clobber)
-		# cant prompt for overwrite when reading from stdin
-		# so force -c
-		# TODO: add force option using getopts
 		if [ ! $interactive ]
 		then
-			if [ -e $new ]
+			if [ -e $dest ]
 			then
-				echo "smv: target file exists, skipping: $new"
+				echo "smv: destination file exists, skipping: $new"
 				continue
 			fi
 		fi
 
-		mv $interactive "$target" "$new"
+		mv -i "$src" "$dest"
 	done
 )
+
+mmv () {
+	if [ ! -e $2 ]
+	then
+		mkdir $2 || return $?
+	elif [ ! -d $2 ]
+	then
+		echo "mmv: target is not a directory: $2"
+		return 1
+	fi
+	find . ! -name . -prune -regex ./"$1" -exec mv {} $2 \;
+}
 
 cpe () {
 	cp $1 $2 && $EDITOR $2

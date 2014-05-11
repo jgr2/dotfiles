@@ -1,4 +1,4 @@
-feh --bg-tile ~/bg.png
+feh --bg-scale ~/bg.png
 
 while sleep 1; 
 do
@@ -7,6 +7,9 @@ done &
 
 xcompmgr &
 xrdb ~/.Xresources
-xrdb -merge .Xscheme
+xrdb -merge ~/.Xscheme
 
-exec dwm
+urxvtd -q -o -f
+
+exec ~/builds/dwm/dwm-6.0/dwm
+#exec gnome-session --session=gnome-classic
