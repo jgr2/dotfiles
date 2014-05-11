@@ -82,15 +82,6 @@ smv () (
 	do
 		dest="$(echo $src | sed "s/$pat/$rep/")"
 
-		if [ ! $interactive ]
-		then
-			if [ -e $dest ]
-			then
-				echo "smv: destination file exists, skipping: $new"
-				continue
-			fi
-		fi
-
 		mv -i "$src" "$dest"
 	done
 )
