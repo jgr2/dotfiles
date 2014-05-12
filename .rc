@@ -15,6 +15,9 @@ export LESS='-R '
 
 ### Aliases
 
+alias du="du -h"
+alias df="df -h"
+
 alias ls="ls --color=auto -Fhal"
 
 alias mv="mv -v"
@@ -29,6 +32,8 @@ alias cu="cp -u"
 alias gdb="gdb -q"
 
 alias sqlite3="sqlite3 -column -header"
+
+#alias mv="$HOME/.shell/bin/mv"
 
 ### Functions
 
@@ -58,10 +63,6 @@ mkcd () {
 	mkdir $1 && cd $1
 }
 
-mkcl () {
-	mkdir $1 && cl $1
-}
-
 mergdir () {
 	for d in $@
 	do
@@ -69,6 +70,7 @@ mergdir () {
 	done
 }
 
+# srename
 smv () (
 	pat=$1
 	rep=$2

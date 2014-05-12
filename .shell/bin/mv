@@ -1,0 +1,72 @@
+#!/bin/sh
+
+# Basic extensions for posix mv(1p)
+
+PROGRAM_NAME="mv"
+
+create=  # create target directory if not exists
+verbose= # print operations
+
+mvopts=  # standard options to mv(1p) (-if)
+target=  # target directory
+tbase=   # target directory basename
+
+OPTIND=
+ret=
+
+while getopts ":vcif" opt
+do
+	case $opt in
+	c)
+		create=1
+		;;
+	v)
+		verbose=1
+		;;
+	f)
+		mvopts="$mvopts -f"
+		;;
+	i)
+		mvopts="$mvopts -i"
+		;;
+	\?)
+		cat >&2 <<USAGE
+$PROGRAM_NAME: unknown option -- $OPTARG
+usage: $PROGRAM_NAME [-ficv] source targe
+       $PROGRAM_NAME [-ficv] source ... directory
+USAGE
+		exit 1
+		;;
+	esac
+done
+
+shift $(($OPTIND - 1))
+
+if [ $# -gt 2 ]
+then
+	eval target='$'$#
+	if ! [ -e "$target" ] && [ "$create" = "1" ]
+	then
+		tbase="$(basename $target)"
+		mkdir $tbase && printf "created '%s'\n" "$tbase/"
+	fi
+fi
+
+mv $movopts $@
+
+r=$?
+if [ "$r" = "0" ] && [ "$verbose" = "1" ]
+then
+	if [ $# -gt 2 ]
+	then
+		for src in ${@%$target}
+		do
+			echo $src '->' $tbase/$src
+		done
+	else
+		echo $1 '->' $2
+	fi
+fi
+
+exit $ret
+
