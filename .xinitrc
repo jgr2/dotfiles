@@ -1,15 +1,17 @@
-feh --bg-scale ~/bg.png
+# vim: set ft=sh:
 
-while sleep 1; 
-do
-	xsetroot -name "$(date) $(cat /sys/class/power_supply/BAT0/capacity)"
-done &
-
-xcompmgr &
 xrdb ~/.Xresources
 xrdb -merge ~/.Xscheme
 
+while sleep .25;
+do
+	xsetroot -name "$(date)"
+done &
+
+xcompmgr &
 urxvtd -q -o -f
 
+feh --bg-scale ~/bg.png
+
 exec ~/builds/dwm/dwm-6.0/dwm
-#exec gnome-session --session=gnome-classic
+
