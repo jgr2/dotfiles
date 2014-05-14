@@ -1,0 +1,29 @@
+#!/bin/sh
+
+RC="$HOME/.shell"
+
+# set if null PREFIX=$RC
+[ -z "$PREFIX" ] && PREFIX="$RC"
+# allows for PREFIX/usr or whwatecfer
+
+#load prefix into path if not in path already ([ -z grep ] && PATH=$PREFIX/bin:$PATH)
+export PATH="$PREFIX/bin:$PATH"
+
+ln -s $RC"/src/rmdir" $PREFIX"/bin/rmdir"
+ln -s $RC"/src/mv" $PREFIX"/bin/mv"
+
+# which(1) output?
+if [ ! -e "/usr/bin/rename" ]
+then
+	ln -s "$RC/src/rename" "$PREFIX/bin/rename"
+fi
+
+if [ ! -e "/usr/bin/readlink" ]
+then
+	ln -s "$RC/src/readlink" "$PREFIX/bin/readlink"
+fi
+
+for i in $(ls -1 "$RC/init/")
+do
+	source "$RC/$i"
+done
