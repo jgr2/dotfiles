@@ -26,11 +26,6 @@ extern int optind, optopt;
 
 #define USAGE "usage: [-fn] file\n"
 
-/* TODO:
- * 	* loop detection - w/ list of paths?
- * 		- SYMLOOP_MAX
- */
-
 void usage (FILE *out, int status, char *message, ...) {
 	va_list ap;
 
@@ -45,7 +40,6 @@ void usage (FILE *out, int status, char *message, ...) {
 	exit(status);
 }
 
-/* use as branch, inline error messages */
 char *actualpath (char *path, char *resolved) {
 	char tmp[PATH_MAX], next[PATH_MAX];
 
@@ -64,7 +58,6 @@ char *actualpath (char *path, char *resolved) {
 		return NULL;
 	}
 
-	/* TODO: dirname/basename splitter */
 	for (i = 0; i < SYMLOOP_MAX; i++) {
 
 		strncpy(tmp, next, sizeof tmp);
