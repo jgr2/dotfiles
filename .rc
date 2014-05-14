@@ -18,7 +18,7 @@ export LESS='-R '
 alias du="du -h"
 alias df="df -h"
 
-alias ls="ls --color=auto -Fhal"
+alias ll="ls --color=auto -Fhal"
 
 alias mv="mv -v"
 alias cp="cp -v"
@@ -118,6 +118,11 @@ bukit () {
 	url="$(curl -X POST --data-binary @- http://p.offblast.org/new | tr -d '\n')"
 	echo $url
 }
+
+# pidof - for systems that don't have it
+#pidof () {
+#	ps a - | sed -e 's/^ *//' | grep "$1" | cut -d ' ' -f 1
+#}
 
 world () {
 	printf "Brisbane: %s\n" "$(date)" && 

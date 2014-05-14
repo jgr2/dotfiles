@@ -1,0 +1,63 @@
+#!/bin/sh
+
+# TODO:
+#	* print usage on failure
+#	* make merge work with -p somehow
+#	* get parent name when merging
+#
+
+PROGRAM_NAME="rmdir"
+
+verbose= # print diagnostics
+merge=   # mv directory contents to parent directory before deleting
+
+options= # base program options
+
+while getopts ":vm-:" opt
+do
+	case "$opt" in
+	-)
+		case "$OPTARG" in
+		merge)
+			merge="1"
+			;;
+		*)
+			options="$options --$OPTARG"
+			;;
+		esac
+		;;
+
+	v)
+		verbose="-v"
+		;;
+	m)
+		merge="1"
+		;;
+	\?)
+		options="$options -$OPTARG"
+		;;
+	esac
+done
+shift $(($OPTIND - 1))
+
+if [ "$merge" = 1 ]
+then
+for d in $@
+do
+	# find test ! -name ./test -prune -print
+	if [ -e $d ] && [ -n "$(ls -A $d)" ]
+	then
+		mv $verbose $d/* $d/..
+		fi
+	done
+fi
+
+rmdir $options $@
+ret=$?
+
+[ $ret = "0" ] && [ -n "$verbose" ] && for d in $@
+do
+	echo "removed '$d'"
+done
+
+exit $ret
