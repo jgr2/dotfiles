@@ -33,8 +33,6 @@ alias gdb="gdb -q"
 
 alias sqlite3="sqlite3 -column -header"
 
-#alias mv="$HOME/.shell/bin/mv"
-
 ### Functions
 
 die () {
@@ -63,43 +61,6 @@ mkcd () {
 	mkdir $1 && cd $1
 }
 
-mergdir () {
-	for d in $@
-	do
-		mv -i ./$d/* ./ && rmdir $d
-	done
-}
-
-# srename
-smv () (
-	pat=$1
-	rep=$2
-
-	shift 2
-
-	for arg in "$@"
-	do
-		echo $arg
-	done |  sed -n "/$pat/ p" | while read -r src
-	do
-		dest="$(echo $src | sed "s/$pat/$rep/")"
-
-		mv -i "$src" "$dest"
-	done
-)
-
-mmv () {
-	if [ ! -e $2 ]
-	then
-		mkdir $2 || return $?
-	elif [ ! -d $2 ]
-	then
-		echo "mmv: target is not a directory: $2"
-		return 1
-	fi
-	find . ! -name . -prune -regex ./"$1" -exec mv {} $2 \;
-}
-
 cpe () {
 	cp $1 $2 && $EDITOR $2
 }
@@ -115,30 +76,15 @@ sprunge () {
 }
 
 bukit () {
-	url="$(curl -X POST --data-binary @- http://p.offblast.org/new | tr -d '\n')"
-	echo $url
+	curl -X POST --data-binary @- http://p.offblast.org/new | tr -d '\n'
 }
-
-# pidof - for systems that don't have it
-#pidof () {
-#	ps a - | sed -e 's/^ *//' | grep "$1" | cut -d ' ' -f 1
-#}
 
 world () {
-	printf "Brisbane: %s\n" "$(date)" && 
-	printf "London: %s\n" "$(TZ='Europe/London' date)" && 
-	echo -n "Los Angeles: " && TZ='America/Los_Angeles' date &&
-	echo -n "New York: " && TZ="America/New_York" date
-}
-
-onbattery () {
-	cpupower frequency-set -g powersave
-	echo battery > /sys/class/drm/card0/device/power_dpm_state
-}
-
-offbattery () {
-	cpupower frequency-set -g performance
-	echo performance > /sys/class/drm/card0/device/power_dpm_state
+	printf "Brisbane: %s\nLondon: %s\nLos Angeles: %s\nNew York: %s\n" \
+		"$(TZ="Australia/Brisbane" date)" \
+		"$(TZ="Europe/London" date)" \
+		"$(TZ="America/Los_Angeles" date)" \
+		"$(TZ="America/New_York" date)"
 }
 
 man() {

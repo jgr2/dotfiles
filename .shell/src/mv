@@ -14,7 +14,7 @@ tbase=   # target directory basename
 OPTIND=
 ret=
 
-while getopts ":vcif-:" opt
+while getopts ":vcifm:r:-:" opt
 do
 	case "$opt" in
 	-)
@@ -22,8 +22,11 @@ do
 		create)
 			create=1
 			;;
-		*)
-			options="$options --$OPTARG"
+		match)
+			match="$OPTARG"
+			;;
+		replace)
+			replace="$OPTARG"
 			;;
 		esac
 		;;
@@ -33,20 +36,31 @@ do
 	v)
 		verbose=1
 		;;
-	f)
-		options="$options -f"
+	m)
+		match="$OPTARG"
 		;;
-	i)
-		options="$options -i"
+	r)
+		replace="$OPTARG"
 		;;
-	\?)
-		cat >&2 <<USAGE
-$PROGRAM_NAME: unknown option -- $OPTARG
-usage: $PROGRAM_NAME [-ficv] source targe
-       $PROGRAM_NAME [-ficv] source ... directory
-USAGE
-		exit 1
+	:)
+		echo "$PROGRAM_NAME: $OPTARG requires argument"
 		;;
+# this won't work, requires white-listing lot's of options, let's not go there
+#while getopts ":vcifm:r:-:" opt
+#	f)
+#		options="$options -f"
+#		;;
+#	i)
+#		options="$options -i"
+#		;;
+#	\?)
+#		cat >&2 <<USAGE
+#$PROGRAM_NAME: unknown option -- $OPTARG
+#usage: $PROGRAM_NAME [-ficv] source targe
+#       $PROGRAM_NAME [-ficv] source ... directory
+#USAGE
+#		exit 1
+#		;;
 	esac
 done
 shift $(($OPTIND - 1))
@@ -54,10 +68,42 @@ shift $(($OPTIND - 1))
 if [ $# -gt 2 ]
 then
 	eval target='$'$#
-	if ! [ -e "$target" ] && [ "$create" = "1" ]
+	if ! [ -d "$target" ]
 	then
 		tbase="$(basename $target)"
-		mkdir $tbase && printf "created '%s'\n" "$tbase/"
+
+		if [ "$create" = "1" ]
+		then
+			mkdir $tbase && echo "created '$tbase/'"
+		fi
+
+		set -- ${@%"$target"}
+	fi
+
+	if [ -n "$match" ]
+	then
+		dests=
+		set -- $(
+			for src
+			do
+				echo $src | grep "$match";
+			done
+		)
+
+		if [ -n "$replace" && ]
+		then
+			for src
+			do
+				dest="$(echo $src | sed "/$match/$src/")"
+				if mv "$options" "$src" "$tbase/$dest"
+				then
+					echo "'$src' -> '$tbase/$dest'"
+				else
+					exit $?
+				fi
+			done
+			exit 0
+		fi
 	fi
 fi
 
@@ -70,12 +116,12 @@ then
 	then
 		for src in ${@%$target}
 		do
-			echo $src '->' $tbase/$src
+			echo "'$src' -> '$tbase/$src'"
 		done
 	else
-		echo $1 '->' $2
+		echo "'$1' -> '$2'"
 	fi
 fi
 
-exit $ret
+exit $r
 

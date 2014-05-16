@@ -40,51 +40,57 @@ void usage (FILE *out, int status, char *message, ...) {
 	exit(status);
 }
 
-char *actualpath (char *path, char *resolved) {
-	char tmp[PATH_MAX], next[PATH_MAX];
+/* This is realpath(3) without automatic allocation of the second parameter,
+ * it just isn't necessary to do that. Returns < 0 on failure, 0 on success
+ * everything else should be assumed to match the behaviour of realpath
+ */
+int actualpath (char *path, char *resolved) {
+	char next[PATH_MAX], *p;
 
 	size_t i;
 	ssize_t r;
 
-	if (!resolved) {
-		if (!(resolved = malloc(PATH_MAX))) {
-			return NULL;
-		}
-	}
-
-
 	if (*stpncpy(next, path, sizeof next) != '\0') {
 		errno = ENAMETOOLONG;
-		return NULL;
+		return -1;
 	}
 
 	for (i = 0; i < SYMLOOP_MAX; i++) {
 
-		strncpy(tmp, next, sizeof tmp);
+		p = strrchr(next, '/');
 
-		if (chdir(dirname(tmp)) < 0) {
-			return NULL;
+		if (p) {
+			p++;
+
+			if (chdir(dirname(next)) < 0) {
+				return -1;
+			}
+		} else {
+			p = next;
 		}
 
 		getcwd(resolved, PATH_MAX);
-	       	strncat(resolved, "/", 2);
-		strncat(resolved, basename(next), PATH_MAX);
+
+		if (*p) {
+		       	strncat(resolved, "/", 2);
+			strncat(resolved, p, PATH_MAX);
+		}
 
 		r = readlink(resolved, next, sizeof next);
 
 		if (r < 0) {
 			if (errno == EINVAL) {
 				errno = 0;
-				return resolved;
+				return 0;
 			}
-			return NULL;
+			return -1;
 		}
 
 		next[r] = '\0';
 	}
 
 	errno = ELOOP;
-	return NULL;
+	return -1;
 }
 
 static int follow = 0;
@@ -120,7 +126,7 @@ int main (int argc, char *argv[]) {
 	}
 
 	if (follow) {
-		r = -(actualpath(argv[optind], resolved) == NULL);
+		r = actualpath(argv[optind], resolved);
 
 	} else {
 		r = readlink(argv[optind], resolved, sizeof resolved);

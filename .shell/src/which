@@ -1,0 +1,61 @@
+#!/bin/sh
+
+PROGRAM_NAME="which"
+
+# BSD which(1) clone
+
+while getopts ":a" opt
+do
+	case $opt in
+		a)
+			all="1"
+			;;
+		\?)
+			cat >&2 <<USAGE
+$PROGRAM_NAME: unknown option -- $OPTARG
+usage: $PROGRAM_NAME [-a] name ...
+USAGE
+			;;
+	esac
+done
+
+shift $(($OPTIND - 1))
+
+status=0
+for f in $@
+do
+	found=0
+	IFS=":"
+	for p in $PATH
+	do
+		if [ -f "$p/$f" -a -x "$p/$f" ]
+		then
+			found=1
+			echo $p/$f
+
+			if [ -z "$all" ]
+			then
+				break
+			fi
+		fi
+	done
+
+	if [ $found -eq 0 ]
+	then
+		echo "$PROGRAM_NAME: $f: Command not found"
+	else
+		status=$(($status + 1))
+	fi
+done
+
+if [ $status -eq $# ]
+then
+	status=0
+elif [ $status -gt 0 ]
+then
+	status=1
+else
+	status=2
+fi
+
+exit $status
