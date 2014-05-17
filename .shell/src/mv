@@ -1,127 +1,137 @@
 #!/bin/sh
 
-# Basic extensions for posix mv(1p)
-
 PROGRAM_NAME="mv"
 
-create=  # create target directory if not exists
-verbose= # print operations
+verbose=0
+create=0
+match=""
+replace=""
 
-options=  # standard options to mv(1p) (-if)
-target=  # target directory
-tbase=   # target directory basename
+options=
 
-OPTIND=
-ret=
+argument_required () {
+	echo "$PROGRAM_NAME: option requires argument -- '$1'" >&2
+	exit 1
+}
 
-while getopts ":vcifm:r:-:" opt
+while getopts ":vcm:r:-:" opt
 do
-	case "$opt" in
-	-)
-		case in "$OPTARG"
-		create)
+	case $opt in
+		-)
+			case "$OPTARG" in
+				verbose)
+					verbose=1
+					;;
+				create)
+					create=1
+					;;
+				match)
+					match="${OPTARG#*=}"
+					;;
+				replace)
+					replace="${OPTARG#*=}"
+					;;
+				match|replace)
+					argument_required "$OPTARG"
+					;;
+				*)
+					options="$options --$OPTARG"
+					;;
+			esac
+			;;
+		v)
+			verbose=1
+			;;
+		c)
 			create=1
 			;;
-		match)
+		m)
 			match="$OPTARG"
 			;;
-		replace)
+		r)
 			replace="$OPTARG"
 			;;
-		esac
-		;;
-	c)
-		create=1
-		;;
-	v)
-		verbose=1
-		;;
-	m)
-		match="$OPTARG"
-		;;
-	r)
-		replace="$OPTARG"
-		;;
-	:)
-		echo "$PROGRAM_NAME: $OPTARG requires argument"
-		;;
-# this won't work, requires white-listing lot's of options, let's not go there
-#while getopts ":vcifm:r:-:" opt
-#	f)
-#		options="$options -f"
-#		;;
-#	i)
-#		options="$options -i"
-#		;;
-#	\?)
-#		cat >&2 <<USAGE
-#$PROGRAM_NAME: unknown option -- $OPTARG
-#usage: $PROGRAM_NAME [-ficv] source targe
-#       $PROGRAM_NAME [-ficv] source ... directory
-#USAGE
-#		exit 1
-#		;;
+		:)
+			argument_required "$OPTARG"
+			;;
+		?)
+			options="$options -$OPTARG"
+			;;
+
 	esac
 done
+
 shift $(($OPTIND - 1))
 
-if [ $# -gt 2 ]
+eval target='$'$#
+tbase="$(basename $target)"
+
+if [ ! -d "$target" -a ! -e "$target" -a $create -eq 1 ]
 then
-	eval target='$'$#
-	if ! [ -d "$target" ]
+	if ! mkdir "$target"
 	then
-		tbase="$(basename $target)"
+		exit $?
+	elif [ $verbose -eq 1 ]
+	then
+		echo "created '$target'"
+	fi
+fi
 
-		if [ "$create" = "1" ]
-		then
-			mkdir $tbase && echo "created '$tbase/'"
-		fi
-
+if [ -e "$target" ]
+then
+	if [ -d "$target" ]
+	then
+		# pop target
 		set -- ${@%"$target"}
+	else
+		# treat target as source file
+		target=
+		tbase="."
 	fi
+fi
 
-	if [ -n "$match" ]
+if [ -n "$match" ]
+then
+	# filter srcs
+	set -- $(for src; do echo $src | grep "$match"; done)
+
+	if [ -n "$replace" ]
 	then
-		dests=
-		set -- $(
-			for src
-			do
-				echo $src | grep "$match";
-			done
-		)
+		for src
+		do
+			dest="$(echo $src | sed "s/$match/$replace/")"
+			if ! mv $options "$src" "$target/$dest"
+			then
+				echo "$PROGRAM_NAME: mv failed: '$src' -> '$target/$dest'" >&2
+				exit $?
+			else
+				if [ $verbose -eq 1 ]
+				then
+					echo "'$src' -> '$target/$dest'"
+				fi
+			fi
+		done
+		exit 0
+	fi
+fi
 
-		if [ -n "$replace" && ]
+if ! mv $options $@ "$target"
+then
+	exit $?
+else
+	if [ $verbose -eq 1 ]
+	then
+		if [ -n "$target" ]
 		then
 			for src
 			do
-				dest="$(echo $src | sed "/$match/$src/")"
-				if mv "$options" "$src" "$tbase/$dest"
-				then
-					echo "'$src' -> '$tbase/$dest'"
-				else
-					exit $?
-				fi
+				echo "'$src' -> '$target/$src'"
 			done
-			exit 0
+		else
+			echo "'$1' -> '$2'"
 		fi
 	fi
 fi
 
-mv $options $@
-
-r=$?
-if [ "$r" = "0" ] && [ "$verbose" = "1" ]
-then
-	if [ $# -gt 2 ]
-	then
-		for src in ${@%$target}
-		do
-			echo "'$src' -> '$tbase/$src'"
-		done
-	else
-		echo "'$1' -> '$2'"
-	fi
-fi
-
-exit $r
+exit 0
 
