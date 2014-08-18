@@ -13,6 +13,8 @@ set history=1000
 set winwidth=85
 set winheight=45
 
+set modeline
+
 syntax on
 filetype plugin on
 
@@ -35,7 +37,7 @@ hi VertSplit cterm=NONE ctermbg=24
 " *** Searching ***
 
 set incsearch
-set hlsearch
+"set hlsearch
 
 " *** Indentation ***
 set cindent
@@ -63,4 +65,3 @@ au BufRead,BufNewFile *.md set ft=markdown
 
 au BufRead,BufNewFile *.{html,js,css} set nocindent autoindent sw=4 ts=4 noexpandtab
 
-execute pathogen#infect()
