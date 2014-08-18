@@ -1,6 +1,3 @@
 #!/bin/sh
-for DOTFILE in .*
-do
-	ln -s $DOTFILE $1/$DOTFILE
-done
+find . -maxdepth 1 -name ".[^.]*" ! -name ".git" -printf "%f\0" -exec ln -s ~/{} $1/{} \;
 

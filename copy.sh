@@ -1,5 +1,2 @@
 #!/bin/sh
-for DOTFILE in .*
-do
-	cp -ur ~/$DOTFILE ./
-done
+find . -maxdepth 1 -name ".[^.]*" ! -name ".git" -exec cp -vur ~/{} ./ \;
