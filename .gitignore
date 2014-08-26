@@ -2,3 +2,4 @@ bak/
 .dwm/dwm
 .profile.d/bin
 .oh-my-zsh
+.*.swp
