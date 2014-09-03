@@ -1,11 +1,9 @@
 #!/bin/sh
 
-find . \
-	-name "bak" -prune -o \
-	-name ".git*" -prune -o \
-		-type f \
-		! -name README.md \
-		! -name link.sh \
-		! -name copy.sh \
-		! -name ".*.swp" \
-		-exec cp -vur ~/{} {} \;
+cd dotfiles
+
+for file in $(find . -type f)
+do
+	cp -iu ~/"$file" "$(realpath $file)"
+done
+

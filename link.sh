@@ -1,6 +1,9 @@
 #!/bin/sh
-find . -maxdepth 1 \
-	-name ".[^.]*" \
-	! -name ".git*" \
-	-exec ln -s ~/{} $1/{} \;
+
+cd dotfiles
+
+for file in $(find . -type f)
+do
+	ln -s "$(realpath "$file")" ~/"$file"
+done
 

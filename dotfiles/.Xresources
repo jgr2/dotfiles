@@ -1,0 +1,24 @@
+
+Xft.dpi:	96
+Xft.antialias:	true
+Xft.rgba:	rgb
+Xft.hinting:	true
+Xft.hintstyle:	hintslight
+
+
+URxvt.scrollBar:	false
+URxvt.font:	xft:inconsolata:size=9
+URxvt.depth:	32
+URxvt.background:	[75]#000
+URxvt.foreground:	#ffffff
+URxvt.cursorColor:	#fff
+URxvt.cursorColor2:	#000
+URxvt.highlightColor: #fff
+URxvt.highlightTextColor: #000
+
+
+!static const char selbgcolor[]      = "#005577";
+
+URxvt.perl-ext-common:  default,matcher
+URxvt.url-launcher:      /usr/bin/chromium
+URxvt.matcher.button:   1
