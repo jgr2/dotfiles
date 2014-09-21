@@ -47,12 +47,6 @@ else # default run pattern:
 		patch
 		build
 	else
-		Git fetch origin
-		if [ $(Git rev-parse @) != $(Git rev-parse @{u}) ]
-		then
-			Git merge origin
-		fi
-
 		build
 	fi
 fi
