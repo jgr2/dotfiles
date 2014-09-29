@@ -1,0 +1,12 @@
+#!/bin/sh
+
+BIN=~/.profile.d/bin
+
+cd src/
+
+for d in */
+do
+	d=${d%/}
+	make $d/$d && mv -v $d/$d $BIN/$d
+done
+

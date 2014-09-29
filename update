@@ -1,0 +1,24 @@
+#!/bin/sh
+
+Mtime() {
+	mtime $@ | awk '{print $1}'
+}
+
+Cmp() {
+	cmp -s $1 $2
+}
+
+cd dotfiles
+
+for file in $(find . -type f)
+do
+	src=~/"$file"
+	dest=$(realpath "$file")
+
+	if Mtime $src $dest | sort -nC && ! Cmp "$src" "$dest"
+	then
+		cp -i "$src" "$dest"
+	fi
+
+done
+
