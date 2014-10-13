@@ -1,11 +1,10 @@
 #!/bin/sh
 
-last_dl () {
-	ls -t ~/$DOWNLOADS/ | head -n 1
+bg_set () {
+	rm -f ~/.bg
+	ln -s ${1:=$(recent -n1 $DOWNLOADS)} ~/.bg
 }
 
 bg_change () {
-	rm ~/.bg
-	ln -s ${1:=$(last_dl)} ~/.bg
+	feh ${FEH_BG_OPT:---bg-fill} $($1:=~/.bg)
 }
-

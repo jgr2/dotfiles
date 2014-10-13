@@ -20,11 +20,11 @@ xcompmgr &
 urxvtd -q -o -f
 xflux -r 1 -l -26.7 -g 153.1
 
-feh ${FEH_BG_OPT:---bg-fill} ~/.bg
+bg_change
 
 ~/.dwm/build.sh
 
-chromium &
+$(which "$BROWSER") &
 urxvtc -e mosh mindlock.us &
 
 exec ~/.dwm/dwm/dwm
