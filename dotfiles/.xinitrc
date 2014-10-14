@@ -20,7 +20,7 @@ xcompmgr &
 urxvtd -q -o -f
 xflux -r 1 -l -26.7 -g 153.1
 
-bg_change
+wallpaper
 
 ~/.dwm/build.sh
 
