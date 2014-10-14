@@ -1,24 +1,23 @@
 #!/bin/sh
 
-Mtime() {
-	mtime $@ | awk '{print $1}'
-}
+PAGER=
 
-Cmp() {
-	cmp -s $1 $2
-}
+cd dotfiles || exit
 
-cd dotfiles
-
-for file in $(find . -type f)
+for file in $(git ls-tree -r --name-only HEAD)
 do
-	src=~/"$file"
-	dest=$(realpath "$file")
+	git diff --exit-code $file ~/$file
 
-	if Mtime $src $dest | sort -nC && ! Cmp "$src" "$dest"
+	if [ $? -ne 0 ]
 	then
-		cp -i "$src" "$dest"
+		printf "update [y/N]? "
+		
+		read -r a
+
+		if echo $a | grep -q "^\(y\|Y\)\(es\?\)\?\$"
+		then
+			git diff --src-prefix=a/a/ $file ~/$file |
+				git -C ../ apply -p 3 --directory=dotfiles/ -
+		fi
 	fi
-
 done
-
