@@ -1,0 +1,4 @@
+#!/bin/sh
+
+[ -e $HOME/.mpd/pid ] || mpd &
+

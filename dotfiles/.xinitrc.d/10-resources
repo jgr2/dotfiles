@@ -1,0 +1,7 @@
+#!/bin/sh
+
+for r in /etc/X11/xinit/.Xresources $HOME/.Xresources $HOME/.Xscheme
+do
+	[ -f "$r" ] && xrdb -merge "$r"
+done
+unset r

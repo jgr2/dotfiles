@@ -1,0 +1,17 @@
+#!/bin/sh
+
+#TODO: more shebangs
+mkscript() {
+	if [ $# -gt 1 ]
+	then
+		case "$2" in
+			sh)	shebang="#!/bin/sh";;
+			awk)	shebang="#!/bin/awk";;
+			sed)	shebang="#!/bin/sed";;
+			perl)	shebang="#!/usr/bin/perl";;
+		esac
+		echo $shebang > "$1"
+	fi
+
+	$(which "$EDITOR") "$1" && chmod u+x "$1"
+}

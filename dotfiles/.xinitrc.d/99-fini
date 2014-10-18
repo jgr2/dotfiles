@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# TODO: * should this script even exist? why not load from ~/.xinitrc?
+#	* fix dwm path
+exec $HOME/.dwm/dwm/dwm

@@ -1,0 +1,10 @@
+#!/bin/sh
+
+default=center
+
+if [ -z echo $1 | grep -x "\(center\|fill\|max\|scale\|tile\)" ]
+	1="$default"
+fi
+
+feh --bg-"$1" "${2:-$(recent -n1 $(xdg-user-dir DOWNLOAD))}"
+

@@ -1,0 +1,3 @@
+#!/bin/sh
+# TODO: move build script to _this_ file
+$HOME/.dwm/build.sh

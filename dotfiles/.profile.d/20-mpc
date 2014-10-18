@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# functions relating to mpc
+
 mpc_albums_by_artist () {
 	mpc -f "%album%" find artist $1 | uniq
 }
