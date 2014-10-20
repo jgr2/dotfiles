@@ -1,3 +1,8 @@
 #!/bin/sh
 
-wallpaper &
+if [ -x $HOME/.fehbg ]
+then
+	$HOME/.fehbg	
+else
+	fehbg $(recent -n1 $DOWNLOADS | tail -n1)
+fi &
