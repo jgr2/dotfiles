@@ -3,3 +3,4 @@ default_find_mode = wrapped
 autocenter_mode = yes
 centered_cursor = yes
 playlist_separate_albums = yes
+enable_window_title = no
