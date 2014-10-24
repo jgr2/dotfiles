@@ -1,3 +1,5 @@
 #!/bin/sh
-# TODO: move build script to _this_ file
-$HOME/.dwm/build.sh
+
+make -C $BUILDS/dwm $MAKE_OPTS X11INC=/usr/include/X11 X11LIB=/usr/lib/X11 ||
+	exit $?
+
