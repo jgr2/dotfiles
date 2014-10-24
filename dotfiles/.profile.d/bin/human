@@ -33,4 +33,4 @@ do
 	esac
 done
 
-awk $AWK_OPTS -f _human
+awk $AWK_OPTS -f $(which _human)
