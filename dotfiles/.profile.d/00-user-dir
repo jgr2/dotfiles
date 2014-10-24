@@ -3,3 +3,5 @@
 export DOWNLOADS="$(xdg-user-dir DOWNLOAD)"
 export MUSIC="$(xdg-user-dir MUSIC)"
 
+export BUILDS=$HOME/builds
+
