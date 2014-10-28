@@ -10,6 +10,7 @@ URxvt.cursorColor2:	#000
 URxvt.highlightColor: #fff
 URxvt.highlightTextColor: #000
 URxvt.transparent: true
+URxvt.shading: 20
 
 
 !static const char selbgcolor[]      = "#005577";
