@@ -5,7 +5,7 @@ then
 
 # add user drop-in path, useful for local builds of things.
 	[ ! -d ~/.profile.d/bin ] && mkdir ~/.profile.d/bin
-	export PATH=$PATH:~/.profile.d/bin
+	export PATH=~/.profile.d/bin:$PATH
 
 
 # source init scripts
