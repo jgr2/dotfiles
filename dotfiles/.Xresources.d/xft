@@ -1,0 +1,9 @@
+! vim: se ft=xdefaults:
+
+Xft.dpi:	96
+Xft.antialias:	true
+Xft.rgba:	rgb
+Xft.hinting:	true
+a
+Xft.hintstyle:	hintslight
+
