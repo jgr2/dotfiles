@@ -17,6 +17,23 @@
 #	-d [depth]
 #		depth of search, see find(1) -maxdepth,
 #		>= 0 (or -0) turns limit off
+#
+#TODO: * extension based filters (preset and custom)
+#
+#	-f [preset]
+#		search for recent files that match an expression preset:
+#
+#		TODO: each preset needs to be extended
+#
+#			* image
+#				*.(jpe?g|a?png|gif|tiff)
+#			* archive
+#				*.(tar|gz(ip)?|bz2?|lz|lzo|xz|zip|rar)
+#			* document
+#				*.(md|html|xml|txt|doc|odf)
+#
+#	-F [expression]
+#		search for recent files that match expression
 
 limit=
 depth=1
@@ -41,7 +58,7 @@ done
 
 shift $(($OPTIND - 1))
 
-if [ $# ]
+if [ $# -gt 0 ]
 then
 	dir=$@
 fi
