@@ -9,3 +9,5 @@ alias ls="ls -F --color=always"
 
 alias mpc='mpc -f "[%position%]: %file%"'
 
+alias ffprobe='ffprobe -hide_banner'
+alias ffmpeg='ffmpeg -hide_banner'
