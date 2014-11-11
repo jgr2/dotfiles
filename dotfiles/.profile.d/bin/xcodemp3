@@ -1,0 +1,43 @@
+#!/bin/sh
+
+PREFIX=
+
+_xcodemp3() {
+	dest="$PREFIX"$(echo $src | chext mp3)
+
+	if [ ! -e "$dest" ]
+	then
+		ffmpeg -i "$src" -qscale:a 0 "$dest"
+	else
+		echo "error: destination '$dest' already exists, skipping" >&2
+	fi
+}
+
+while getopts p: opt
+do
+	case $opt in
+	p)
+		prefix=$(echo $OPTARG | addslash);;
+	?)
+		printf "Usage: %s: -p [prefix] [files...]\n" $0
+		exit 2;;
+
+	esac
+done
+shift $(($OPTIND - 1))
+
+for src in $@
+do
+	if [ "$src" = "--" ]
+	then
+		break
+	fi
+
+	_xcodemp3 "$src"
+done
+
+while read src
+do
+	_xcodemp3 "$src"
+done
+
