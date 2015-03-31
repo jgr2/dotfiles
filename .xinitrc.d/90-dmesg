@@ -1,0 +1,3 @@
+#!/bin/sh
+urxvtc -e sh -c 'dmesg --reltime --follow --color=always | less +F' &
+

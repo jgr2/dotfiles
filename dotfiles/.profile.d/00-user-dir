@@ -1,8 +1,0 @@
-#!/bin/sh
-
-export DOWNLOADS="$(xdg-user-dir DOWNLOAD)"
-#export MUSIC="$(xdg-user-dir MUSIC)"
-export MUSIC=$HOME/Desktop/Music
-
-export BUILDS=$HOME/builds
-

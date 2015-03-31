@@ -1,7 +1,0 @@
-#!/bin/sh
-
-# checks for non-opt arguments
-has_arg () {
-	$(echo $@ | grep "\(^\|\s\)[^-]")
-}
-

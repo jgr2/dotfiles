@@ -1,4 +1,0 @@
-dotfiles
-========
-
-all the things
