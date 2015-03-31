@@ -1,34 +1,49 @@
-set title
-set number
-set showmode
-set showcmd
 
-set mouse=a
-set ruler
+" *** Autocmds ***
+"
 
-set autoread
-set history=1000
+if has('autocmd')
 
-set winwidth=85
-set winheight=45
+	augroup markdown
+		au BufRead,BufNewFile *.md set ft=markdown
+	augroup end
 
-set modeline
+	augroup web
+		au BufRead,BufNewFile *.{html,js,css}
+\			set sts=2 sw=2 ts=2 expandtab
+	augroup end
+
+	" apply autocmds to specific directory (uni assignments)
+	augroup oua
+		au BufRead,BufEnter */OUA/CPT121/*.java
+\			set sts=4 sw=4 ts=4 expandtab
+	augroup end
+
+endif
+
+" *** Undo ***
+"
+set undodir=~/.vim/backups
+set undofile
 
 " *** Searching ***
+"
+if has('extra_search')
+	set incsearch
+	set hlsearch
 
-set incsearch
-"set hlsearch
+	" bind Ctrl+_ to :nohl - clear highlight from hlsearch
+	map <C-_> :nohl<CR>
+endif
+
 
 " *** Indentation ***
-
-set softtabstop=0
-
-set noexpandtab
-
-set tabstop=8
-set shiftwidth=8
-
+"
 set autoindent
+set smartindent
+
+" *** Gvim ***
+"
 
 " gvim settings: make gvim look more like a terminal
 
@@ -47,34 +62,52 @@ set guioptions-=b
 set guicursor+=a:blinkon0 " remove stupid blinking cursor
 set guicursor+=a:block    " cursor is always a block cursor
 
-syntax on
+" *** Look and feel ***
+"
 
-set list listchars=tab:\ \ ,trail:~
+if has('title')
+	set title
+endif
 
 set nowrap
-set linebreak
 
-" *** Undo ***
-"
-set undodir=~/.vim/backups
-set undofile
+set number
 
-" *** Files ***
+set showmode
 
-au BufRead,BufNewFile *.md set ft=markdown
+if has('cmdline_info')
+	set showcmd
+	set ruler
+endif
 
-au BufRead,BufNewFile *.{html,js,css} set nocindent autoindent sw=4 ts=4 noexpandtab
+if has('wildmenu')
+	set wildmenu
+endif
 
-" latexsuite stuff
-set grepprg=grep\ -nH\ $*
-let g:tex_flavor = "latex"
+set mouse=a
+
+set winwidth=85
+set winheight=45
+
+if has('verspplit')
+	set splitright " Everything splits right
+endif
+
+set list
+set listchars=tab:>-,trail:~
 
 " Turn off all jellybeans background colors for transparent terminal
 " ------------------------------------------------------------------
 
 " where turning off background colors would leave the text invisible
-" on a dark background I've used the original background color for 
-" the foreground
+" on a dark background I've used the background color picked by jellybeans
+" for the the foreground.
+"
+" NOTE:
+"	Setting the background of StatusLine and StatusLineNC to none
+"	seems to result in a bug in which the space of the status line
+"	is filled with carets- very annoying!
+"
 let g:jellybeans_overrides = {
 \	'Normal': {
 \		'256ctermbg': 'none',
@@ -104,11 +137,11 @@ let g:jellybeans_overrides = {
 \		'attr': 'bold',
 \	},
 \	'StatusLine': {
-\		'256ctermbg': 'none',
+\		'256ctermbg': '236',
 \		'256ctermfg': 'none',
 \	},
 \	'StatusLineNC': {
-\		'256ctermbg': 'none',
+\		'256ctermbg': '234',
 \		'256ctermfg': '240',
 \	},
 \	'VertSplit': {
@@ -218,3 +251,5 @@ let g:jellybeans_overrides = {
 let g:jellybeans_background_color_256="none"
 
 colors jellybeans
+
+syntax on
