@@ -1,8 +1,9 @@
-
 " *** Autocmds ***
 "
 
 if has('autocmd')
+
+	filetype plugin indent on
 
 	augroup markdown
 		au BufRead,BufNewFile *.md set ft=markdown
@@ -35,12 +36,6 @@ if has('extra_search')
 	" bind Ctrl+_ to :nohl - clear highlight from hlsearch
 	map <C-_> :nohl<CR>
 endif
-
-
-" *** Indentation ***
-"
-set autoindent
-set smartindent
 
 " *** Gvim ***
 "
