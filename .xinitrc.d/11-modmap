@@ -1,7 +1,9 @@
 #!/bin/sh
 
-for m in /etc/X11/xinit/.Xmodmap $HOME/.Xmodmap
+for m in $HOME/.Xmodmap.d/*
 do
 	[ -f "$m" ] && xmodmap "$m"
 done
 unset m
+
+
