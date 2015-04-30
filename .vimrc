@@ -17,7 +17,7 @@ if has('autocmd')
 	" apply autocmds to specific directory (uni assignments)
 	augroup oua
 		au BufRead,BufEnter */OUA/CPT121/*.java
-\			set sts=4 sw=4 ts=4 expandtab
+\			set sts=4 sw=4 ts=4 expandtab ff=dos
 	augroup end
 
 endif
