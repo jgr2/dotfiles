@@ -1,3 +1,0 @@
-# make context menu key just another windows super key
-xmodmap -e "keysym Menu = Super_L"
-
