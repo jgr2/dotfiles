@@ -4,3 +4,7 @@ autocenter_mode = yes
 centered_cursor = yes
 playlist_separate_albums = yes
 enable_window_title = no
+
+mpd_music_dir = ~/Desktop/Music
+
+song_columns_list_format = (16)[]{aE} (6f)[green]{NE} (50)[white]{t|f:Title} (20)[cyan]{b} (7f)[]{yE} (7f)[magenta]{l}
