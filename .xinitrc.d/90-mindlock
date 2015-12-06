@@ -1,0 +1,2 @@
+#!/bin/sh
+urxvtc -title mindlock -e mosh mindlock.us 'tmux attach || tmux' &
