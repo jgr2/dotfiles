@@ -1,6 +1,4 @@
-" *** Autocmds ***
-"
-
+" *** Autocmds *** " 
 if has('autocmd')
 
 	filetype plugin indent on
@@ -18,6 +16,8 @@ if has('autocmd')
 	augroup oua
 		au BufRead,BufEnter */OUA/CPT121/*.java
 \			set sts=4 sw=4 ts=4 expandtab ff=dos
+		au BufRead,BufEnter */OUA/CPT120/*.jy
+\			set filetype=python sts=2 sw=2 ts=2 expandtab ff=dos
 	augroup end
 
 endif
@@ -240,6 +240,9 @@ let g:jellybeans_overrides = {
 \	},
 \	'PreciseJumpTarget': {
 \		'256ctermbg': 'none',
+\	},
+\	'Comment': {
+\		'256ctermfg': '145',
 \	},
 \}
 
