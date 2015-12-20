@@ -1,0 +1,54 @@
+#!/bin/sh
+
+PROGRAM_NAME="fehbg"
+
+USAGE="$PROGRAM_NAME [center|fill|max|scale|tile] [path...]"
+
+setting_re="\(center\|fill\|max\|scale\|tile\)"
+
+is_setting () {
+	grep -xq $setting_re
+}
+
+set_setting () {
+	sed "s;--bg-$setting_re;--bg-$1;"
+}
+
+set_args () {
+	sed "s; \+'.*'$; $@;"
+}
+
+if [ -x $HOME/.fehbg ]
+then
+	if [ $# -gt 0 ]
+	then
+		script=$(cat $HOME/.fehbg | grep "^feh" | tail -n 1)
+
+		if echo $1 | is_setting
+		then
+			script=$(echo $script | set_setting "$1")
+			shift 1
+		fi
+		
+		if [ $# -gt 0 ]
+		then
+			script=$(echo $script | set_args \
+				"$(for a in $@; do printf " \'$a\'"; done)"
+			)
+		fi
+
+		eval $script
+	else
+		$HOME/.fehbg
+	fi
+
+	exit $?
+fi
+
+if [ $# -lt 1 ]
+then
+	set -- $(recent -n1 $DOWNLOADS)
+fi
+
+feh --bg-${setting:-center} $@
+

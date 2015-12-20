@@ -1,0 +1,2 @@
+#!/bin/sh
+mpc -f $MUSIC/%file% playlist

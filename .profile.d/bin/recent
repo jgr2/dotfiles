@@ -1,0 +1,72 @@
+#!/bin/sh
+
+# recent [OPTIONS] [DIR ...]
+#
+#	list most recent entries of a directory
+#
+# ARGUMENTS
+#	DIR
+#		directory specifier, defaults to .
+#
+# OPTIONS
+#
+#	-n [limit]
+#		limit output to limit entries, see head(1) -n,
+#		-0 turns limit off
+#
+#	-d [depth]
+#		depth of search, see find(1) -maxdepth,
+#		>= 0 (or -0) turns limit off
+#
+#TODO: * extension based filters (preset and custom)
+#
+#	-f [preset]
+#		search for recent files that match an expression preset:
+#
+#		TODO: each preset needs to be extended
+#
+#			* image
+#				*.(jpe?g|a?png|gif|tiff)
+#			* archive
+#				*.(tar|gz(ip)?|bz2?|lz|lzo|xz|zip|rar)
+#			* document
+#				*.(md|html|xml|txt|doc|odf)
+#
+#	-F [expression]
+#		search for recent files that match expression
+
+limit=
+depth=1
+dir="."
+
+while getopts "n:d:" opt
+do
+	case "$opt" in
+		n)
+			limit="$OPTARG"
+			;;
+		d)
+			if [ $OPTARG -le 0 ]
+			then
+				depth=
+			else
+				depth="$OPTARG"
+			fi
+			;;
+	esac
+done
+
+shift $(($OPTIND - 1))
+
+if [ $# -gt 0 ]
+then
+	dir=$@
+fi
+
+
+find $dir $([ "$depth" ] && echo -maxdepth $depth) \
+		-not -path "$dir" -printf "%Ts\t%p\n" | \
+	sort -rnk 1 | \
+	cut -f 2 | \
+	head $([ "$limit" ] && echo "-n $limit" )
+
