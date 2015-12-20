@@ -1,0 +1,27 @@
+#!/bin/sh
+
+(
+	n=0
+	cur=1
+
+	IFS='
+	'
+	for line in $(mpc outputs)
+	do
+		n=$(($n+1))
+		if [[ "$(echo $line | grep ".*enabled$")" ]]
+		then
+			cur=$n
+		fi
+	done
+
+	next=1
+
+	if [[ $cur -lt $n ]]
+	then
+		next=$(($cur + 1))
+	fi
+
+	mpc disable $cur 2&>1 >/dev/null &&
+	       	mpc enable $next 2&>1 >/dev/null
+)
