@@ -29,7 +29,7 @@ _transcode () {
 		return 1
 	fi
 
-	dest="$PREFIX"$(echo "$1" | sext "$EXT")
+	dest="$PREFIX"$(basename $(echo "$1" | sext "$EXT"))
 
 	if [ -e "$dest" ]
 	then
@@ -41,11 +41,11 @@ _transcode () {
 
 	if [ -z "$rate" ]
 	then
-		echo "error: failed to get bitrate from '$src'" >&2
+		echo "error: failed to get bitrate from '$1'" >&2
 		return 1
 	fi
 
-	ffmpeg -i "$src" -b:a "$rate" "$dest"
+	ffmpeg -strict -2 -i "$1" -b:a "$rate" "$dest"
 }
 
 while getopts p:e: opt
@@ -64,18 +64,22 @@ done
 
 shift $(($OPTIND - 1))
 
-for src in "$@"
-do
-	if [ "$src" = "--" ]
-	then
-		while read src
-		do
+(
+	IFS='
+'
+	for src in $@
+	do
+		if [ "$src" = "--" ]
+		then
+			while read src
+			do
+				_transcode "$src"
+			done
+			break
+		else
 			_transcode "$src"
-		done
-		break
-	else
-		_transcode "$src"
-	fi
-done
+		fi
+	done
+)
 
 
