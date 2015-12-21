@@ -1,2 +1,2 @@
 #!/bin/sh
-export MUSIC="$HOME/Desktop/Music"
+export MUSIC="/home/jgr/Desktop/Music"
