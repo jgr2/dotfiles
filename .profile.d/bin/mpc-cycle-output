@@ -22,6 +22,6 @@
 		next=$(($cur + 1))
 	fi
 
-	mpc disable $cur 2&>1 >/dev/null &&
-	       	mpc enable $next 2&>1 >/dev/null
+	mpc disable $cur 2>&1 >/dev/null &&
+		mpc enable $next 2>&1 >/DEV/null
 )
