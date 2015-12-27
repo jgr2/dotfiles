@@ -1,5 +1,5 @@
 #!/bin/sh
 
-make -C $BUILDS/dwm $MAKE_OPTS X11INC=/usr/include/X11 X11LIB=/usr/lib/X11 ||
+make -C $DWM_PATH $MAKE_OPTS X11INC=/usr/include/X11 X11LIB=/usr/lib/X11 ||
 	exit $?
 
