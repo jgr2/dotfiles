@@ -18,7 +18,7 @@ BEGIN {
 		if (ENVIRON["BLOCK_SIZE"] > 0) {
 			blocksize = ENVIRON["BLOCK_SIZE"]
 		} else {
-			blocksize = 1024
+			blocksize = 1000
 		}
 	}
 
