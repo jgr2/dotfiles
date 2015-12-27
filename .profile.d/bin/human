@@ -28,7 +28,7 @@ do
 			addopt -v field="$OPTARG"
 			;;
 		B)
-			addopt -v bloacksize="$OPTARG"
+			addopt -v blocksize="$OPTARG"
 			;;
 	esac
 done
