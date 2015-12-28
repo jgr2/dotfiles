@@ -1,0 +1,4 @@
+#!/bin/sh
+# Get the selected sink's index
+pacmd list-sinks |
+	awk '/* index:/{print $3; exit}'

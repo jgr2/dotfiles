@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+# Get and set the volume of the active sink
+#
+# Usage: pa-volume [VOLUME]
+# 
+# see pactl set-sink-volume for specifying volume argument
+
+if [ $1 ]
+then
+	pactl set-sink-volume $(pa-selected-sink-index) "$1"
+else
+	pacmd list-sinks |
+		awk '/^\svolume:/{i++} i=='$(pa-selected-sink-no)'{print $5; exit}'
+fi

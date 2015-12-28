@@ -1,0 +1,4 @@
+#!/bin/sh
+# Get the currently selected sink's entry number in listings
+pacmd list-sinks |
+	awk '/index:/{i++} /* index:/{print i; exit}'
