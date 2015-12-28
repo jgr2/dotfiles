@@ -1,7 +1,7 @@
 ! vim: se ft=xdefaults:
 
 URxvt.scrollBar:	false
-URxvt.font:	xft:inconsolata:size=9
+URxvt.font:	xft:inconsolata:size=8
 URxvt.depth:	32
 URxvt.background:	[75]#000
 URxvt.foreground:	#ffffff
