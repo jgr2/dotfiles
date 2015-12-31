@@ -1,7 +1,27 @@
 #!/bin/sh
 # human [options]
+# 
+# A utility to convert integers of a field representing a byte size to
+# human readable format.
 #
-# syntactic sugary, see _human
+# This is especially useful for sorting byte sizes from du but still
+# wanting the benefits of the -h option or converting byte fields from
+# /sys/class/net/statistics or /proc/net/dev
+#
+# Examples:
+#
+# * Display a short list of the largest files in a directory
+#   sorted descending by size and display byte size in a human
+#   readable format
+#
+#    $ du | sort -rn | human | head
+#
+#   Note that for large directories this may take a while
+#
+# * Display network total traffic byte sizes in human readable format
+#
+#    $ cat /sys/class/net/<INTERFACE>/statistics/<tx_bytes,rx_bytes> |
+#          human
 #
 # OPTIONS
 #	-d [delimeter]
