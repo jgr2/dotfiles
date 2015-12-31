@@ -1,2 +1,2 @@
 #!/bin/sh
-urxvtc -title mindlock -e mosh mindlock.us &
+urxvtc -name mindlock -e mosh mindlock.us &
