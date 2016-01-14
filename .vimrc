@@ -19,6 +19,10 @@ if has('autocmd')
 		au BufRead,BufEnter */OUA/CPT120/*.jy
 \			set filetype=python sts=2 sw=2 ts=2 expandtab ff=dos
 	augroup end
+	augroup xresourcesd
+		au BufRead,BufEnter ~/.Xresources.d/*
+\			set ft=xdefaults
+	augroup end
 
 endif
 
@@ -82,7 +86,7 @@ endif
 set mouse=a
 
 set winwidth=85
-set winheight=45
+set winheight=55
 
 if has('verspplit')
 	set splitright " Everything splits right

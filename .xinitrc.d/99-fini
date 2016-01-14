@@ -1,2 +1,2 @@
 #!/bin/sh
-exec dwm
+$DWM_PATH/dwm 2>> $HOME/.dwmlog

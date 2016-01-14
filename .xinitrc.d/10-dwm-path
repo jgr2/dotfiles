@@ -1,2 +1,2 @@
 #!/bin/sh
-export DWM_PATH="$HOME/code/dwm/"
+export DWM_PATH="$HOME/code/dwm-git" DWMSTATUS_PATH="$HOME/code/dwmstatus/src/"

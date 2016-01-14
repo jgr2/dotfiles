@@ -1,11 +1,9 @@
-! vim: se ft=xdefaults:
-
 URxvt.scrollBar:		false
-URxvt.font:			xft:inconsolata:size=8
+URxvt.font:			xft:Inconsolata:size=8
 URxvt.depth:			32
 URxvt*background:		[75]#000
-urxvt*background:		rgba:0000/0000/0200/c800
-URxvt.foreground:		#ffffff
+!urxvt*background:		rgba:0000/0000/0200/c800
+!URxvt.foreground:		#ffffff
 URxvt.cursorColor:		#fff
 URxvt.cursorColor2:		#000
 URxvt.highlightColor:		#fff
@@ -14,12 +12,6 @@ URxvt.highlightTextColor:	#000
 !URxvt.shading: 20
 
 URxvt.geometry:			80x50
-
-!static const char selbgcolor[]      = "#005577";
-
-!URxvt.perl-ext-common:  default,matcher
-!URxvt.matcher.button:   1
-!URxvt.url-launcher:      /usr/bin/xdg-open
 
 URxvt.perl-ext-common:		default,clipboard,url-select,keyboard-select
 
@@ -32,3 +24,5 @@ URxvt.keysym.M-u:		perl:url-select:select_next
 
 
 URxvt.url-select.launcher:	/usr/bin/xdg-open
+
+URxvt.urgentOnBell:		true

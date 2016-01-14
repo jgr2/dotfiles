@@ -201,8 +201,10 @@ message_delay_time = 2
 ##
 #
 #song_list_format = {%a - }{%t}|{$8%f$9}$R{$3(%l)$9}
+song_list_format = {%a - %t}|{%f}
 #
 #song_status_format = {{%a{ "%b"{ (%y)}} - }{%t}}|{%f}
+song_status_format = {%a - %t - %b}|{%f}
 #
 #song_library_format = {%n - }{%t}|{%f}
 #
@@ -277,7 +279,7 @@ message_delay_time = 2
 ##
 #
 #song_columns_list_format =  (20)[]{a} (6f)[green]{NE} (50)[white]{t|f:Title} (20)[cyan]{b} (7f)[magenta]{l}
-song_columns_list_format = (20)[blue]{a} (20)[blue]{b} (50)[]{tr|fr:Title} 
+song_columns_list_format = (18)[blue]{a} (34)[blue]{b} (50)[]{tr|fr:Title} 
 #
 ##### various settings #####
 #
@@ -298,7 +300,7 @@ song_columns_list_format = (20)[blue]{a} (20)[blue]{b} (50)[]{tr|fr:Title}
 ##
 ## Note: Possible display modes: classic, columns.
 ##
-#playlist_display_mode = columns
+playlist_display_mode = classic
 #
 #browser_display_mode = classic
 #
@@ -314,7 +316,7 @@ song_columns_list_format = (20)[blue]{a} (20)[blue]{b} (50)[]{tr|fr:Title}
 #
 #volume_change_step = 2
 #
-#autocenter_mode = no
+autocenter_mode = yes
 #
 #centered_cursor = no
 #
@@ -348,7 +350,7 @@ progressbar_look = "── "
 #
 header_visibility = no
 #
-statusbar_visibility = no
+statusbar_visibility = yes
 #
 titles_visibility = no
 #
@@ -518,7 +520,7 @@ main_window_highlight_color = cyan
 #
 progressbar_elapsed_color = cyan
 #
-#statusbar_color = default
+statusbar_color = cyan
 #
 #alternative_ui_separator_color = black
 #

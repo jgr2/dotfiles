@@ -2,6 +2,6 @@
 
 for r in /etc/X11/xinit/.Xresources $HOME/.Xresources $HOME/.Xresources.d/*
 do
-	[ -f "$r" ] && xrdb -merge "$r"
+	[ -x "$r" ] && xrdb -merge "$r"
 done
 unset r
