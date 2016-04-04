@@ -1,6 +1,19 @@
+" *** Backups et al. ***
+"
+
+" get out of my directories!
+set backupdir-=.
+set dir-=.
+
+set backupdir^=~/.vim/backup
+set dir^=~/.vim/tmp//
+
+" stop polluting my system with .netrwhist files!
+let g:netrw_home = "~/.vim/"
+
 " *** Undo ***
 "
-set undodir=~/.vim/backups
+set undodir=~/.vim/undo
 set undofile
 
 " *** Searching ***
