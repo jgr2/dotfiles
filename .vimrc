@@ -1,23 +1,3 @@
-" *** Autocmds *** " 
-if has('autocmd')
-
-	filetype plugin indent on
-
-	augroup web
-		au BufRead,BufNewFile *.{html,js,css}
-\			set sts=2 sw=2 ts=2 expandtab
-	augroup end
-
-	" apply autocmds to specific directory (uni assignments)
-	augroup oua
-		au BufRead,BufEnter */OUA/CPT121/*.java
-\			set sts=4 sw=4 ts=4 expandtab ff=dos
-		au BufRead,BufEnter */OUA/CPT120/*.jy
-\			set filetype=python sts=2 sw=2 ts=2 expandtab ff=dos
-	augroup end
-
-
-endif
 
 " *** Undo ***
 "
@@ -89,6 +69,25 @@ endif
 
 set list
 set listchars=tab:>-,trail:~
+
+" *** Autocmds *** " 
+if has('autocmd')
+
+	filetype plugin indent on
+
+	augroup web
+		au BufRead,BufNewFile *.{html,js,css}
+\			set sts=2 sw=2 ts=2 expandtab
+	augroup end
+
+	" apply autocmds to specific directory (uni assignments)
+	augroup oua
+		au BufRead,BufEnter */OUA/CPT121/*.java
+\			set sts=4 sw=4 ts=4 expandtab ff=dos
+		au BufRead,BufEnter */OUA/CPT120/*.jy
+\			set filetype=python sts=2 sw=2 ts=2 expandtab ff=dos
+	augroup end
+endif
 
 colors molokai
 
