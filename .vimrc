@@ -97,6 +97,6 @@ endif
 set list
 set listchars=tab:>-,trail:~
 
-colors jellybeans
+colors molokai
 
 syntax on
