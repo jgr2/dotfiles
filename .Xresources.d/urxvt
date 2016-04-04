@@ -1,13 +1,15 @@
 URxvt.scrollBar:		false
+
 URxvt.font:			xft:Inconsolata:size=8
 URxvt.depth:			32
-URxvt*background:		[75]#000
-!urxvt*background:		rgba:0000/0000/0200/c800
-!URxvt.foreground:		#ffffff
+
+URxvt*background:		[90]#030304
+
 URxvt.cursorColor:		#fff
 URxvt.cursorColor2:		#000
 URxvt.highlightColor:		#fff
 URxvt.highlightTextColor:	#000
+
 !URxvt.transparent: true
 !URxvt.shading: 20
 
