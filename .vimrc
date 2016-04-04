@@ -3,10 +3,6 @@ if has('autocmd')
 
 	filetype plugin indent on
 
-	augroup markdown
-		au BufRead,BufNewFile *.md set ft=markdown
-	augroup end
-
 	augroup web
 		au BufRead,BufNewFile *.{html,js,css}
 \			set sts=2 sw=2 ts=2 expandtab
@@ -19,10 +15,7 @@ if has('autocmd')
 		au BufRead,BufEnter */OUA/CPT120/*.jy
 \			set filetype=python sts=2 sw=2 ts=2 expandtab ff=dos
 	augroup end
-	augroup xresourcesd
-		au BufRead,BufEnter ~/.Xresources.d/*
-\			set ft=xdefaults
-	augroup end
+
 
 endif
 
