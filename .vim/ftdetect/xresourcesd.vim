@@ -1,1 +1,1 @@
-au BufRead,BufEnter ~/.Xresources.d/* set ft=xdefaults
+au BufRead,BufEnter */.Xresources.d/* set ft=xdefaults
