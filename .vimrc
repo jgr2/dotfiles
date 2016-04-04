@@ -1,4 +1,3 @@
-
 " *** Undo ***
 "
 set undodir=~/.vim/backups
@@ -83,9 +82,9 @@ if has('autocmd')
 	" apply autocmds to specific directory (uni assignments)
 	augroup oua
 		au BufRead,BufEnter */OUA/CPT121/*.java
-\			set sts=4 sw=4 ts=4 expandtab ff=dos
+\			set sw=4 ts=4 et sa ff=dos
 		au BufRead,BufEnter */OUA/CPT120/*.jy
-\			set filetype=python sts=2 sw=2 ts=2 expandtab ff=dos
+\			set filetype=python sw=2 ts=2 et sa ff=dos
 	augroup end
 endif
 
