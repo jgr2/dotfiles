@@ -13,8 +13,10 @@ let g:netrw_home = "~/.vim/"
 
 " *** Undo ***
 "
-set undodir=~/.vim/undo
-set undofile
+if has('persistent_undo')
+	set undodir=~/.vim/undo
+	set undofile
+endif
 
 " *** Searching ***
 "
