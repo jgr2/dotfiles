@@ -2,7 +2,7 @@
 
 for m in $HOME/.Xmodmap.d/*
 do
-	[ -f "$m" ] && xmodmap "$m"
+	[ -x "$m" ] && xmodmap "$m"
 done
 unset m
 
