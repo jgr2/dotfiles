@@ -1,4 +1,8 @@
 bak/
 .dwm/dwm
 .oh-my-zsh
-.*.swp
+.*.sw[po]
+*.netrwhist
+.vim/backup
+.vim/tmp
+.vim/undo
