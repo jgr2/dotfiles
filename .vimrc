@@ -45,21 +45,23 @@ endif
 "
 
 " gvim settings: make gvim look more like a terminal
+if has('gui_running')
 
-set guioptions-=m " turn off menu
-set guioptions-=M " don't even source menu script
-set guioptions-=T " no toolbar
-set guioptions-=c " console dialogs
+	set guioptions-=m " turn off menu
+	set guioptions-=M " don't even source menu script
+	set guioptions-=T " no toolbar
+	set guioptions-=c " console dialogs
 
-" eliminate scrollbars, with extreme prejudice
-set guioptions-=r
-set guioptions-=R
-set guioptions-=l
-set guioptions-=L
-set guioptions-=b
+	" eliminate scrollbars, with extreme prejudice
+	set guioptions-=r
+	set guioptions-=R
+	set guioptions-=l
+	set guioptions-=L
+	set guioptions-=b
 
-set guicursor+=a:blinkon0 " remove stupid blinking cursor
-set guicursor+=a:block    " cursor is always a block cursor
+	set guicursor+=a:blinkon0 " remove stupid blinking cursor
+	set guicursor+=a:block    " cursor is always a block cursor
+endif
 
 " *** Look and feel ***
 "
