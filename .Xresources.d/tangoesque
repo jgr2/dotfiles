@@ -1,11 +1,11 @@
-*background:  #121212
+*background:  [90]#080808
 *foreground:  #dfdfdf
 ! Black
 *color0:      #202020
 *color8:      #606060
 ! Red
-*color1:      #ff6565
-*color9:      #ff8d8d
+*color1:      #ff5555
+*color9:      #ff7d7d
 ! Green
 *color2:      #93d44f
 *color10:     #c8e7a8
