@@ -101,7 +101,21 @@ if has('autocmd')
 		au BufRead,BufEnter */OUA/CPT120/*.jy
 \			set filetype=python sw=2 ts=2 et sa ff=dos
 	augroup end
+
+	augroup templates
+		au!
+		au BufNewFile *.* call LoadTemplates(expand("<afile>:e"))
+	augroup end
+
 endif
+
+fun LoadTemplates (ext)
+	for tmpl in reverse(split(glob($HOME.'/.vim/templates/*.'.a:ext), '\n'))
+		execute '0r '.tmpl
+	endfor
+
+	normal Go
+endfun
 
 colors molokai
 
