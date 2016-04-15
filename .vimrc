@@ -110,11 +110,17 @@ if has('autocmd')
 endif
 
 fun LoadTemplates (ext)
-	for tmpl in reverse(split(glob($HOME.'/.vim/templates/*.'.a:ext), '\n'))
-		execute '0r '.tmpl
-	endfor
 
-	normal Go
+	let l:templates = reverse(split(glob($HOME.'/.vim/templates/*.'.a:ext), '\n'))
+
+	if len(l:templates)
+
+		for tmpl in l:templates
+			execute '0r '.tmpl
+		endfor
+
+		normal Go
+	endif
 endfun
 
 colors molokai
