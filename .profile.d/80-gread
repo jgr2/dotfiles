@@ -1,0 +1,38 @@
+#!/bin/sh
+#
+# gread
+#
+# Read input into variables based on regexp pattern groups
+#
+# USAGE
+#
+# gread PATTERN var ...
+#
+# Where PATTERN is a perl regular expression and var is a
+# variable to be set to the first group matched, and so forth.
+#
+# EXAMPLE
+#
+# 	echo -e "ab\ncd" | while gread "(.)(.)" foo bar
+# 	do
+# 		echo "foo: $foo, bar: $bar"
+# 		...
+# 	done
+#
+# Would output:
+# 	foo: a, bar: b
+# 	foo: c, bar: d
+#
+# NOTES
+#
+# Group and argument count mismatches should behave in
+# exactly the same way as read(1p)
+#
+
+gread() {
+	IFS= read -r line || return $?;
+
+	read -r $(shift; echo $@) <<EOF
+		$(perl -e 'print "$_\t" for ("'$line'" =~ /'$1'/g)')
+EOF
+}
