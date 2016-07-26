@@ -6,10 +6,11 @@
 #
 # USAGE
 #
-# gread PATTERN var ...
+# gread PATTERN [var ...]
 #
 # Where PATTERN is a perl regular expression and var is a
 # variable to be set to the first group matched, and so forth.
+# If var is not supplied gread will print the captured groups.
 #
 # EXAMPLE
 #
@@ -25,14 +26,19 @@
 #
 # NOTES
 #
-# Group and argument count mismatches should behave in
+# * Group and argument count mismatches should behave in
 # exactly the same way as read(1p)
 #
 
 gread() {
-	IFS= read -r line || return $?;
+	[ $# -eq 0 ] && return 1
 
-	read -r $(shift; echo $@) <<EOF
-		$(perl -e 'print "$_\t" for ("'$line'" =~ /'$1'/g)')
+	if [ $# -eq 1 ]
+	then
+		_gread $1
+	else
+		read -r $(shift; echo $@) <<EOF
+			$(_gread $1)
 EOF
+	fi
 }

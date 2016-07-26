@@ -1,0 +1,4 @@
+#!/bin/sh
+[ $# -gt 0 ] || exit 1
+IFS= read -r line || exit $?;
+perl -e 'print join("\t", "'$line'" =~ /'$1'/g)'
