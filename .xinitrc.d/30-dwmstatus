@@ -1,2 +1,5 @@
 #!/bin/sh
-$DWMSTATUS_PATH/dwmstatus &
+while true
+do
+	$DWMSTATUS_PATH/dwmstatus
+done &
