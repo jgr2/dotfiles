@@ -22,7 +22,7 @@ if [ -x $HOME/.fehbg ]
 then
 	if [ $# -gt 0 ]
 	then
-		script=$(cat $HOME/.fehbg | grep "^feh" | tail -n1)
+		script=$(cat $HOME/.fehbg | sed -n 's/^feh \+//p' | tail -n1)
 
 		# change the script background mode setting
 		if is_setting "$1"
@@ -39,7 +39,7 @@ then
 			)
 		fi
 
-		eval $script
+		eval "feh $FEH_OPTIONS $script"
 	else
 		$HOME/.fehbg
 	fi
@@ -52,5 +52,5 @@ then
 	set -- $(recent -n1 $DOWNLOADS)
 fi
 
-feh --bg-${setting:-center} $@
+feh $FEH_OPTIONS --bg-${setting:-center} $@
 
