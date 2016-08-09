@@ -22,18 +22,20 @@ if [ -x $HOME/.fehbg ]
 then
 	if [ $# -gt 0 ]
 	then
-		script=$(cat $HOME/.fehbg | grep "^feh" | tail -n 1)
+		script=$(cat $HOME/.fehbg | grep "^feh" | tail -n1)
 
+		# change the script background mode setting
 		if is_setting "$1"
 		then
 			script=$(echo $script | set_setting "$1")
-			shift 1
+			shift
 		fi
-		
+
+		# change the script image files
 		if [ $# -gt 0 ]
 		then
 			script=$(echo $script | set_args \
-				"$(for a in $@; do printf " \'$a\'"; done)"
+				"$(for f in "$@"; do printf " \'%s\'" "$f"; done)"
 			)
 		fi
 
