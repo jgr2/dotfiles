@@ -7,7 +7,7 @@ USAGE="$PROGRAM_NAME [center|fill|max|scale|tile] [path...]"
 setting_re="\(center\|fill\|max\|scale\|tile\)"
 
 is_setting () {
-	grep -xq $setting_re
+	printf "%s\n" "$1" | grep -xq "$setting_re"
 }
 
 set_setting () {
@@ -24,7 +24,7 @@ then
 	then
 		script=$(cat $HOME/.fehbg | grep "^feh" | tail -n 1)
 
-		if echo $1 | is_setting
+		if is_setting "$1"
 		then
 			script=$(echo $script | set_setting "$1")
 			shift 1
