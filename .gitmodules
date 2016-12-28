@@ -1,0 +1,3 @@
+[submodule ".profile.d/bin"]
+	path = .profile.d/bin
+	url = https://github.com/jgrar/jgr-utils

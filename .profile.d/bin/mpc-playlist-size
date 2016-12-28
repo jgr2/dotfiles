@@ -1,8 +1,0 @@
-#!/bin/sh
-mpc-playlist | \
-	while read line
-	do
-		du "$line" | cut -f 1
-	done | \
-	awk 'BEGIN{total=0} {total+=$0} END{print total}'
-
