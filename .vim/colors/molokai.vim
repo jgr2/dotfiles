@@ -13,6 +13,7 @@ if &t_Co > 255
 	" turn off all background colors
 	if exists("g:nobg256") && g:nobg256 == 1
 		hi Normal          ctermbg=none
+		hi NonText         ctermbg=none
 		hi Todo            ctermbg=none
 		hi LineNr          ctermbg=none
 
