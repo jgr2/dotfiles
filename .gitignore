@@ -1,6 +1,5 @@
 bak/
 .dwm/dwm
-.oh-my-zsh
 .*.sw[po]
 *.netrwhist
 .vim/backup
