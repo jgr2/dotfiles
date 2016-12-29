@@ -1,0 +1,6 @@
+#!/bin/sh
+ls -A1 | grep -v -e '\.git' -e 'install-dotfiles' | \
+	while read line
+	do
+		ln -rs "$line" "$HOME/$line"
+	done
