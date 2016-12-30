@@ -4,3 +4,4 @@
 [submodule ".oh-my-zsh"]
 	path = .oh-my-zsh
 	url = https://github.com/jgrar/oh-my-zsh.git
+	branch = custom
