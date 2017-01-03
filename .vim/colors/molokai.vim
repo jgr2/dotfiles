@@ -62,5 +62,6 @@ if &t_Co > 255
 		hi PmenuSel        ctermbg=none
 		hi PmenuSbar       ctermbg=none
 		hi SignColumn      ctermbg=none
+		hi Special         ctermbg=none
 	endif
 endif
