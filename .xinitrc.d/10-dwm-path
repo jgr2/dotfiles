@@ -1,2 +1,12 @@
 #!/bin/sh
-export DWM_PATH="$HOME/builds/dwm" DWMSTATUS_PATH="$HOME/builds/dwmstatus/src/"
+if [ -z "$DWM_PATH" ]
+then
+	DWM_PATH="$HOME/builds/dwm"
+fi
+
+if [ -z "$DWMSTATUS_PATH" ]
+then
+	DWMSTATUS_PATH="$HOME/builds/dwmstatus"
+fi
+
+export DWM_PATH DWMSTATUS_PATH
