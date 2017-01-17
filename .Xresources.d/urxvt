@@ -1,9 +1,9 @@
 URxvt.scrollBar:		false
 
-URxvt.font:			xft:Inconsolata:size=8
+URxvt.font:			xft:Inconsolata:size=10
 URxvt.depth:			32
 
-!URxvt*background:		[90]#030304
+URxvt*background:		[45]#202020
 
 URxvt.cursorColor:		#fff
 URxvt.cursorColor2:		#000
