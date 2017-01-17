@@ -82,7 +82,7 @@ if has('verspplit')
 endif
 
 set list
-set listchars=tab:>-,trail:~
+set listchars=tab:⋅·,trail:~
 
 " *** Autocmds *** " 
 if has('autocmd')
