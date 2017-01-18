@@ -9,4 +9,9 @@ then
 	DWMSTATUS_PATH="$HOME/builds/dwmstatus"
 fi
 
+if [ -z "$DWM_LOG_PATH" ]
+then
+	DWM_LOG_PATH="$HOME/.local/share/dwm"
+fi
+
 export DWM_PATH DWMSTATUS_PATH
