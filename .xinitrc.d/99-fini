@@ -1,2 +1,6 @@
 #!/bin/sh
-$DWM_PATH/dwm 2>> $HOME/.dwmlog
+if [ -e "$DWM_LOG_PATH/dwm.log" ]
+then
+	mv "$DWM_LOG_PATH/dwm.log" "$DWM_LOG_PATH/dwm-prev.log"
+fi
+$DWM_PATH/dwm 2> "$DWM_LOG_PATH/dwm.log"
