@@ -13,3 +13,5 @@ alias ffprobe='ffprobe -hide_banner'
 alias ffmpeg='ffmpeg -hide_banner'
 
 alias youtube-dl='youtube-dl --no-mtime'
+
+alias json-pretty='python -m json.tool'
