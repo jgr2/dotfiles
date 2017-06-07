@@ -1,3 +1,23 @@
+" *** Editing ***
+"
+set backspace=indent,eol,start " obligatory backspace setting
+
+set textwidth=80 " the 'stuck in the 80s' console width wrap settings
+set wrapmargin=80
+
+set nowrap " turn off soft wrapping
+
+" formatoptions (see: fo-table for more goodies)
+set formatoptions+=b " wrap at whitespace
+
+set formatoptions+=c " wrap comments with leading comment char
+set formatoptions+=r " same on enter
+set formatoptions+=o " same on 'o'
+set formatoptions+=j " join combines comments
+set formatoptions+=q " 'gq' formats comments as well
+
+set formatoptions+=n " numbered list wrapping
+
 " *** Backups et al. ***
 "
 
