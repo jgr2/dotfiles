@@ -2,7 +2,7 @@
 "
 set backspace=indent,eol,start " obligatory backspace setting
 
-set textwidth=80 " the 'stuck in the 80s' console width wrap settings
+set textwidth=80 " the 'stuck in the 80s console width' wrap settings
 set wrapmargin=80
 
 set nowrap " turn off soft wrapping
@@ -76,8 +76,6 @@ endif
 if has('title')
 	set title
 endif
-
-set nowrap
 
 set number
 
