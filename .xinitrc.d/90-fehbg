@@ -1,2 +1,2 @@
 #!/bin/sh
-sh $HOME/.fehbg
+$HOME/.fehbg
