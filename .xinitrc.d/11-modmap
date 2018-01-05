@@ -1,6 +1,6 @@
 #!/bin/sh
 
-for m in $HOME/.Xmodmap.d/*
+for m in /etc/X11/xinit/.Xmodmap $HOME/.Xmodmap.d/*
 do
 	[ -x "$m" ] && xmodmap "$m"
 done
