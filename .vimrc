@@ -141,6 +141,15 @@ fun LoadTemplates (ext)
 	endif
 endfun
 
+" Language specific settings
+
+let g:rust_recommended_style = 0
+
+" Final
+
 colors molokai
 
+execute pathogen#infect()
+
+filetype plugin indent on
 syntax on
