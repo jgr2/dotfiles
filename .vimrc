@@ -68,6 +68,10 @@ if has('gui_running')
 
 	set guicursor+=a:blinkon0 " remove stupid blinking cursor
 	set guicursor+=a:block    " cursor is always a block cursor
+
+	if has('gui_win32')
+		set guifont=Inconsolata:h10
+	endif
 endif
 
 " *** Look and feel ***
