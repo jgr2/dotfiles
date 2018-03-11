@@ -1,0 +1,36 @@
+
+*background:  #202020
+*foreground:  #f5f4f7
+
+! Black + DarkGrey
+*color0:  #000500
+*color8:  #877e7a
+
+! DarkRed + Red
+*color1:  #c71f1f
+*color9:  #c34b42
+
+! DarkGreen + Green
+*color2:  #aedb5b
+*color10: #ccf89a
+
+! DarkYellow + Yellow
+*color3: #f0b968
+*color11: #ffdc84
+
+! DarkBlue + Blue
+*color4:  #4691ce
+*color12:  #a2d1ff
+
+! DarkMagenta + Magenta
+*color5: #e086a0
+*color13: #ffadcc
+
+!DarkCyan + Cyan
+*color6:  #3ce8d5
+*color14: #b6fffa
+
+! LightGrey + White
+*color7:  #f1e6e3
+*color15: #f5f4f7
+
