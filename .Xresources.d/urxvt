@@ -5,13 +5,8 @@ URxvt.depth:			32
 
 URxvt*background:		[45]#202020
 
-URxvt.cursorColor:		#fff
-URxvt.cursorColor2:		#000
-URxvt.highlightColor:		#fff
-URxvt.highlightTextColor:	#000
-
-!URxvt.transparent: true
-!URxvt.shading: 20
+URxvt.cursorColor:		#f5f4f7
+URxvt.highlightColor:		#403d3d
 
 URxvt.geometry:			80x50
 
