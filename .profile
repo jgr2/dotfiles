@@ -1,19 +1,18 @@
 #!/bin/sh
 
-if [ -d ~/.profile.d ]
-then
+# .profile for the masses
+#
+# This script loads executable configuration files from .config/profile.d and
+# performs mission-critical actions only
 
-# add user drop-in path, useful for local builds of things.
-	[ ! -d ~/.profile.d/bin ] && mkdir ~/.profile.d/bin
-	export PATH=~/.profile.d/bin:$PATH
+export CONFIG_DIR=$HOME
 
-
-# source init scripts
-	for f in ~/.profile.d/*
-	do
-		[ -f "$f" -a -x "$f" ] && source $(realpath "$f")
-	done
-	unset f
-fi
+for file in $CONFIG_DIR/.profile.d/*
+do
+	if [ -f "$file" -a -x "$file" ]
+	then
+		source $(realpath $file)
+	fi
+done
 
 # vim: ft=sh:
