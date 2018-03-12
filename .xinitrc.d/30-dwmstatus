@@ -1,5 +1,5 @@
 #!/bin/sh
 while true
 do
-	$DWMSTATUS_PATH/dwmstatus
+	$DWMSTATUS_PATH/dwmstatus 2> /dev/null
 done &
