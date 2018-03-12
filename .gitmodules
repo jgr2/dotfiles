@@ -1,6 +1,3 @@
-[submodule ".profile.d/bin"]
-	path = .profile.d/bin
-	url = https://github.com/jgrar/jgr-utils
 [submodule ".oh-my-zsh"]
 	path = .oh-my-zsh
 	url = https://github.com/jgrar/oh-my-zsh.git
