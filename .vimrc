@@ -83,7 +83,8 @@ endif
 
 set number
 
-set showmode
+"set showmode
+set noshowmode
 
 if has('cmdline_info')
 	set showcmd
@@ -150,10 +151,15 @@ endfun
 let g:rust_recommended_style = 0
 
 " Final
-
-colors molokai
+if &term=~"linux"
+	colors delek
+else
+	colors molokai
+endif
 
 execute pathogen#infect()
 
 filetype plugin indent on
 syntax on
+
+set laststatus=2
