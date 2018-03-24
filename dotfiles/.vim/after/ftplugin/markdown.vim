@@ -1,3 +1,1 @@
-se ts=4 sw=4
-se fo-=2 ai
-
+se fo-=2 ai " fixes https://github.com/tpope/vim-markdown/issues/98
