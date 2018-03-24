@@ -1,1 +1,1 @@
-au BufRead,BufNewFile *.md set ft=markdown
+au BufRead,BufNewFile *.txt set ft=markdown
