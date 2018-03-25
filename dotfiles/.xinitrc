@@ -2,7 +2,7 @@
 
 # .xinitrc for the masses
 #
-# This script sources executable xinit scripts from .config/xinitrc.d
+# This script sources executable xinit scripts from $CONFIG_DIR/xinitrc.d
 
 for file in $CONFIG_DIR/.xinitrc.d/*
 do
