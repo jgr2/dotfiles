@@ -18,6 +18,8 @@ set formatoptions+=q " 'gq' formats comments as well
 
 set formatoptions+=n " numbered list wrapping
 
+nnoremap Q gq
+
 " *** Backups et al. ***
 "
 
