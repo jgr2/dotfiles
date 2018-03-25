@@ -1,2 +1,5 @@
 #!/bin/sh
-urxvtd -q -o -f
+if [ -z $(pgrep -u "$(whoami)" "urxvtd") ]
+then
+	urxvtd -q -f -o
+fi
