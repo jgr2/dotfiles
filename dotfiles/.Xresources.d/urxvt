@@ -1,6 +1,6 @@
 URxvt.scrollBar:		false
 
-URxvt.font:			xft:Inconsolata:size=10
+URxvt.font:			xft:Inconsolata:size=10,xft:Dejavu Sans Mono:size=10
 URxvt.depth:			32
 
 URxvt*background:		[45]#202020
