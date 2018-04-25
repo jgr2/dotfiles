@@ -106,8 +106,10 @@ if has('verspplit')
 	set splitright " Everything splits right
 endif
 
+
 set list
 set listchars=tab:⋅·,trail:~
+"set listchars=trail:·,eol:↲,tab:⇥\ 
 
 " *** Autocmds *** " 
 if has('autocmd')
