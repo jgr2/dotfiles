@@ -2,8 +2,7 @@
 
 # .profile for the masses
 #
-# This script loads executable configuration files from $CONFIG_DIR/profile.d and
-# performs mission-critical actions only
+# This script loads executable configuration files from $CONFIG_DIR/profile.d/
 
 export CONFIG_DIR=$HOME
 
